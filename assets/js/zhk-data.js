@@ -34,10 +34,10 @@ window.ATAMURA_ZHK = [
     "gallery": [
       "assets/img/zhk/atmosfera/001.jpg",
       "assets/img/zhk/atmosfera/002.jpg",
-      "assets/img/zhk/atmosfera/008.jpg",
-      "assets/img/zhk/atmosfera/012.jpg",
-      "assets/img/zhk/atmosfera/010.jpg",
-      "assets/img/zhk/atmosfera/018.jpg"
+      "assets/img/zhk/atmosfera/003.jpg",
+      "assets/img/zhk/atmosfera/004.jpg",
+      "assets/img/zhk/atmosfera/005.jpg",
+      "assets/img/zhk/atmosfera/006.jpg"
     ],
     "realPhotos": 20,
     "site": "https://atmo.atamuragroup.kz",
@@ -111,12 +111,11 @@ window.ATAMURA_ZHK = [
     "statusDetail": "",
     "hero_image": "assets/img/zhk/monarch/001.jpg",
     "gallery": [
+      "assets/img/zhk/monarch/001.jpg",
       "assets/img/zhk/monarch/002.jpg",
+      "assets/img/zhk/monarch/003.jpg",
       "assets/img/zhk/monarch/004.jpg",
-      "assets/img/zhk/monarch/006.jpg",
-      "assets/img/zhk/monarch/010.jpg",
-      "assets/img/zhk/monarch/015.jpg",
-      "assets/img/zhk/monarch/018.jpg"
+      "assets/img/zhk/monarch/005.jpg"
     ],
     "realPhotos": 20,
     "site": "https://monar.atamuragroup.kz",
