@@ -523,6 +523,20 @@
   .features-strip-inner { text-align: center; max-width: 1100px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 32px); }
   .features-strip-eyebrow { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-deep); margin: 0 0 var(--s-6); }
 
+  /* Таблица планировок на странице ЖК (данные из Profitbase, PM 2026-06-06). */
+  .zk-layouts-wrap { overflow-x: auto; margin-top: var(--s-3); border: 1px solid var(--line); border-radius: var(--r-md); }
+  .zk-layouts { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .zk-layouts thead th { background: var(--bg); padding: 12px 14px; text-align: left; font-weight: 600; color: var(--ink-soft); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid var(--line); }
+  .zk-layouts tbody td { padding: 12px 14px; border-bottom: 1px solid oklch(94% 0.005 230); }
+  .zk-layouts tbody tr:last-child td { border-bottom: 0; }
+  .zk-layouts tbody tr:hover { background: oklch(98% 0.005 230); }
+  .zk-layouts td:nth-child(2) { font-variant-numeric: tabular-nums; color: var(--ink-soft); font-size: 13px; }
+  .zk-layouts td:nth-child(3) { font-variant-numeric: tabular-nums; }
+  .zk-layouts td:nth-child(4) { font-weight: 600; color: var(--ink); }
+  @media (max-width: 640px) {
+    .zk-layouts thead th, .zk-layouts tbody td { padding: 10px 8px; font-size: 12px; }
+  }
+
   /* Hero-фото-слайдер на /о-компании и /контакты (PM 2026-06-06): по 1 фото из каждого ЖК с плавной ротацией. */
   .pagehero.pagehero-multi { position: relative; overflow: hidden; background: var(--dark-cta); }
   .pagehero-slides { position: absolute; inset: 0; z-index: 0; }
