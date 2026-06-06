@@ -423,6 +423,20 @@
   .help-cta h3 { font-size: var(--t-h2); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 var(--s-3); }
   .help-cta p { font-size: 16px; color: oklch(80% 0.005 230); margin: 0; max-width: 50ch; }
 
+  /* «Поможем с выбором» + ИИ-помощник в одном блоке (объединение по запросу PM 2026-06-06) */
+  .help-cta.is-with-ai { grid-template-columns: 1.05fr 0.95fr; align-items: stretch; }
+  .help-cta-text { display: flex; flex-direction: column; gap: var(--s-3); }
+  .help-cta-actions { display: flex; gap: var(--s-2); flex-wrap: wrap; margin-top: auto; padding-top: var(--s-3); }
+  .help-cta.is-with-ai .ai-helper {
+    /* светлая «приклеенная» карточка ИИ-помощника внутри тёмного контейнера */
+    background: oklch(96% 0.005 230);
+    color: var(--ink);
+    border: 0;
+    border-radius: var(--r-md);
+    padding: var(--s-5);
+  }
+  .help-cta.is-with-ai .ai-helper p { color: var(--ink-soft); }
+
   /* ============ PREMIUM 2-CARD ============ */
   .premium-row { padding-block: var(--sect-py); }
   .premium-row h2 { font-size: var(--t-h2); font-weight: 600; letter-spacing: -0.025em; margin: 0 0 var(--s-5); }
@@ -884,6 +898,10 @@
     .sticky-row { grid-template-columns: 1fr auto; }
     .sticky-counter, .sticky-close { display: none; }
     .help-cta { grid-template-columns: 1fr; }
+    .help-cta.is-with-ai { gap: var(--s-5); }
+    .help-cta.is-with-ai .ai-helper { padding: var(--s-4); }
+    .help-cta-actions { gap: var(--s-2); }
+    .help-cta-actions .btn { flex: 1 1 auto; justify-content: center; min-width: 0; }
     .floater { bottom: 88px; }
     .float-btn { width: 52px; height: 52px; }
     .theme-switcher { top: auto; bottom: 90px; right: 12px; }
