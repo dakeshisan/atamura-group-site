@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# Soft-launch: сайт закрыт от индексации до завершения доводки. Снять — заменить на Allow: / + Sitemap.
