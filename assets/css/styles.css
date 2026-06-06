@@ -920,7 +920,7 @@
     .sticky-row { grid-template-columns: 1fr auto; }
     .sticky-counter, .sticky-close { display: none; }
     .help-cta { grid-template-columns: 1fr; }
-    .help-cta.is-with-ai { gap: var(--s-5); }
+    .help-cta.is-with-ai { grid-template-columns: 1fr; gap: var(--s-5); }
     .help-cta.is-with-ai .ai-helper { padding: var(--s-4); }
     .help-cta-actions { gap: var(--s-2); }
     .help-cta-actions .btn { flex: 1 1 auto; justify-content: center; min-width: 0; }
