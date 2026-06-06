@@ -491,7 +491,7 @@
         '<p class="cat-note">Цена — «от». Точную стоимость и подходящие квартиры подберёт менеджер.</p></div>' +
         '<button class="cat-fav-toggle" type="button" id="cat-fav" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-4.35-9.2-8.05C1 10.6 1.4 7.4 3.9 6.1c1.9-1 4.1-.4 5.3 1.2L12 10l2.8-2.7c1.2-1.6 3.4-2.2 5.3-1.2 2.5 1.3 2.9 4.5 1.1 6.85C18.5 16.65 12 21 12 21z"/></svg>Избранное<span class="cat-fav-n" id="cat-fav-n"></span></button></div>' +
       '<div class="cat-grid" id="cat-grid"></div>' +
-      '<div class="cat-empty" id="cat-empty" hidden><span id="cat-empty-msg">Под эти параметры вариантов нет.</span> <a class="btn btn-brand btn-sm" id="cat-empty-link" hidden></a> <button class="btn btn-outline btn-sm" type="button" id="cat-empty-reset">Сбросить фильтр</button></div>';
+      '<div class="cat-empty" id="cat-empty" hidden><span id="cat-empty-msg">Под эти параметры вариантов нет.</span> <a class="btn btn-outline btn-sm" id="cat-empty-link" hidden></a></div>';
 
     var grid = byId("cat-grid"), count = byId("cat-count"), empty = byId("cat-empty");
     var pmaxR = byId("cat-pmax"), pmaxV = byId("cat-pmax-v"), zkS = byId("cat-zk"), dealS = byId("cat-deal"), srokS = byId("cat-srok"), sortS = byId("cat-sort");
@@ -811,6 +811,20 @@
     calc();
   }
 
+  /* Ротация фото-слайдов в hero на /о-компании и /контакты */
+  function bindPageheroSlider() {
+    document.querySelectorAll(".pagehero-multi .pagehero-slides").forEach(function (box) {
+      var slides = box.querySelectorAll(".pagehero-slide");
+      if (slides.length < 2) return;
+      var i = 0;
+      setInterval(function () {
+        slides[i].classList.remove("is-on");
+        i = (i + 1) % slides.length;
+        slides[i].classList.add("is-on");
+      }, 5000);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     renderZhkDetail();
     renderCatalog();
@@ -819,6 +833,7 @@
     bindForms(document);
     bindScrollAnim();
     bindHeroSlider();
+    bindPageheroSlider();
     bindStickyHeader();
     bindActiveNav();
     bindFavCount();

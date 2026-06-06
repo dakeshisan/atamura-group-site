@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600;700&family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/styles.css?v=2a794e7b" />
+<link rel="stylesheet" href="assets/css/styles.css?v=c18bae2f" />
 <!-- GA4: вставьте Measurement ID в build_site.mjs (GA4_ID), затем node build_site.mjs. События уже копятся в window.dataLayer. -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ATAMURA GROUP","alternateName":"Atamura Group","url":"https://atamura.group","logo":"https://atamura.group/assets/img/logo-navy.png","description":"Застройщик Алматы с 2016 года. 8 жилых комплексов — от доступного жилья до делюкс-таунхаусов.","foundingDate":"2016","areaServed":{"@type":"City","name":"Алматы"},"address":{"@type":"PostalAddress","addressCountry":"KZ","addressLocality":"Алматы","streetAddress":"ул. Толе би, 12"},"telephone":"+7 700 700 11 11","sameAs":["https://instagram.com/atamura.group","https://t.me/atamuragroup"]}</script>
 </head>
@@ -33,7 +33,6 @@
 <div class="util">
   <div class="util-row">
     <nav class="util-tabs" aria-label="Сегменты">
-      <a class="is-on" aria-current="true">Жилая недвижимость</a>
     </nav>
     <a class="city" title="Мы работаем в Алматы">
       <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5c2.7 0 5 2.2 5 5 0 4-5 8-5 8s-5-4-5-8c0-2.8 2.3-5 5-5z" fill="currentColor"/><circle cx="8" cy="6.5" r="2" fill="white"/></svg>
@@ -118,7 +117,6 @@
     <div class="drawer-section">
       <h4>Сегменты</h4>
       <nav class="drawer-nav" style="border: 0;">
-        <a href="index.html">Жилая недвижимость</a>
       </nav>
     </div>
   </aside>
@@ -138,7 +136,7 @@
   <div class="cmp-pick">
     <div class="cmp-pick-title">Выберите комплексы для сравнения:</div>
     <div class="cmp-chips" role="group" aria-label="Жилые комплексы">
-      <label class="cmp-chip"><input type="checkbox" name="cmp" value="atmosfera"><span>ATMOSFERA</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="aura"><span>AURA</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="monarch"><span>MONARCH</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="keruen"><span>KERUEN</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="aqsai"><span>AQSAI RESORT</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="bravo"><span>BRAVO</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="discovery"><span>DISCOVERY</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="arlan"><span>ARLAN</span></label>
+      <label class="cmp-chip"><input type="checkbox" name="cmp" value="atmosfera"><span>АТМОСФЕРА</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="aura"><span>AURA</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="monarch"><span>MONARCH</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="keruen"><span>KERUEN</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="aqsai"><span>AQSAI RESORT</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="bravo"><span>BRAVO</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="discovery"><span>DISCOVERY</span></label><label class="cmp-chip"><input type="checkbox" name="cmp" value="arlan"><span>ARLAN</span></label>
     </div>
     <div class="cmp-pick-actions"><button class="btn btn-light" type="button" id="cmpClear">Сбросить</button><button class="btn btn-brand" type="button" id="cmpGo">Сравнить →</button></div>
   </div>
@@ -146,7 +144,7 @@
 </div></section>
 <script>
 (function(){
-  var rows=[{"slug":"atmosfera","name":"ATMOSFERA","ru":"Атмосфера","district":"Турксибский р-н, Алматы","status":"Строится","segment":"Комфорт","price":"от 38,8 млн ₸","rooms":"1 · 2 · 3","seismic":"до 9 баллов"},{"slug":"aura","name":"AURA","ru":"Аура","district":"мкр. Алатау, Талгарский р-н","status":"Строится","segment":"Комфорт+","price":"от 13,9 млн ₸","rooms":"1 · 2 · 3","seismic":"—"},{"slug":"monarch","name":"MONARCH","ru":"Монарх","district":"Медеуский р-н, Алматы","status":"Сдан","segment":"Бизнес","price":"Продажи завершены","rooms":"2 · 3 · 4","seismic":"—"},{"slug":"keruen","name":"KERUEN","ru":"Керуен","district":"Кульджинский тракт, с. Туздыбастау","status":"Строится","segment":"Комфорт","price":"от 13,7 млн ₸","rooms":"Студия · 1 · 2 · 3","seismic":"до 9 баллов"},{"slug":"aqsai","name":"AQSAI RESORT","ru":"Аксай Резорт","district":"Карасайский р-н, с. Кырыгауылды","status":"Строится","segment":"Делюкс","price":"от 40,7 млн ₸","rooms":"Таунхаус","seismic":"до 9 баллов"},{"slug":"bravo","name":"BRAVO","ru":"Браво","district":"Алматы, р-н Жана Куат","status":"Строится","segment":"Бизнес","price":"от 21,1 млн ₸","rooms":"1 · 2 · 3","seismic":"до 9 баллов"},{"slug":"discovery","name":"DISCOVERY","ru":"Дискавери","district":"с. Жана-Куат, Алматинская обл.","status":"Скоро","segment":"Комфорт","price":"Открытие — скоро","rooms":"1 · 2 · 3","seismic":"до 9 баллов"},{"slug":"arlan","name":"ARLAN","ru":"Арлан","district":"с. Бесагаш, Талгарский р-н","status":"Сдан","segment":"Комфорт","price":"Продажи завершены","rooms":"1 · 2 · 3","seismic":"—"}];
+  var rows=[{"slug":"atmosfera","name":"АТМОСФЕРА","ru":"Атмосфера","district":"Турксибский р-н, Алматы","status":"Строится","segment":"Комфорт","price":"от 38,8 млн ₸","rooms":"1 · 2 · 3","seismic":"до 9 баллов"},{"slug":"aura","name":"AURA","ru":"Аура","district":"мкр. Алатау, Талгарский р-н","status":"Строится","segment":"Комфорт+","price":"от 13,9 млн ₸","rooms":"1 · 2 · 3","seismic":"—"},{"slug":"monarch","name":"MONARCH","ru":"Монарх","district":"Медеуский р-н, Алматы","status":"Сдан","segment":"Бизнес","price":"Продажи завершены","rooms":"2 · 3 · 4","seismic":"—"},{"slug":"keruen","name":"KERUEN","ru":"Керуен","district":"Кульджинский тракт, с. Туздыбастау","status":"Строится","segment":"Комфорт","price":"от 13,7 млн ₸","rooms":"Студия · 1 · 2 · 3","seismic":"до 9 баллов"},{"slug":"aqsai","name":"AQSAI RESORT","ru":"Аксай Резорт","district":"Карасайский р-н, с. Кырыгауылды","status":"Строится","segment":"Делюкс","price":"от 40,7 млн ₸","rooms":"Таунхаус","seismic":"до 9 баллов"},{"slug":"bravo","name":"BRAVO","ru":"Браво","district":"Алматы, р-н Жана Куат","status":"Строится","segment":"Бизнес","price":"от 21,1 млн ₸","rooms":"1 · 2 · 3","seismic":"до 9 баллов"},{"slug":"discovery","name":"DISCOVERY","ru":"Дискавери","district":"с. Жана-Куат, Алматинская обл.","status":"Скоро","segment":"Комфорт","price":"Открытие — скоро","rooms":"1 · 2 · 3","seismic":"до 9 баллов"},{"slug":"arlan","name":"ARLAN","ru":"Арлан","district":"с. Бесагаш, Талгарский р-н","status":"Сдан","segment":"Комфорт","price":"Продажи завершены","rooms":"1 · 2 · 3","seismic":"—"}];
   var byId=function(id){return document.getElementById(id);};
   var boxes=document.querySelectorAll('input[name="cmp"]');
   function render(){
@@ -343,8 +341,8 @@
 <script type="speculationrules">{"prerender":[{"where":{"href_matches":"/*"},"eagerness":"moderate"}]}</script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="assets/js/zhk-data.js?v=2a794e7b"></script>
-<script src="assets/js/flats-data.js?v=2a794e7b"></script>
-<script src="assets/js/app.js?v=2a794e7b"></script>
+<script src="assets/js/zhk-data.js?v=c18bae2f"></script>
+<script src="assets/js/flats-data.js?v=c18bae2f"></script>
+<script src="assets/js/app.js?v=c18bae2f"></script>
 </body>
 </html>
