@@ -95,6 +95,15 @@
   }
   /* Montserrat заметно шире Jost — верхнее меню из 8 пунктов слегка ужимаем, чтобы оно помещалось в строку. */
   html[lang="kk"] .nav-main { gap: 8px; font-size: 12px; letter-spacing: -0.005em; }
+  /* Казахский герой-поиск: Montserrat шире → строка не собиралась и кнопка «Пәтерлерді көрсету» переносилась
+     («съезжала»). Даём форме полную ширину родителя (.wrap=980px) + слегка ужимаем чипы/кнопку, чтобы поля и
+     кнопка встали в один ряд как в русском. На планшете (≤1023px) кнопка занимает всю ширину строки — выглядит
+     как цельная CTA-полоса, а не осиротевшая кнопка. */
+  html[lang="kk"] .herosearch { max-width: 1000px; gap: 8px; }
+  html[lang="kk"] .herosearch .hs-chips { gap: 6px; }
+  html[lang="kk"] .herosearch .hs-chip { font-size: 14px; }
+  html[lang="kk"] .herosearch .hs-go { font-size: 13px; padding-left: 16px; padding-right: 16px; }
+  @media (max-width: 1023px) { html[lang="kk"] .herosearch .hs-go { flex: 1 1 100%; justify-content: center; } }
   img { display: block; max-width: 100%; height: auto; }
   a { color: inherit; text-decoration: none; }
   button { font: inherit; cursor: pointer; }
