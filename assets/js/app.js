@@ -562,7 +562,7 @@
     srokS.addEventListener("change", function () { state.srok = srokS.value; apply(); });
     sortS.addEventListener("change", function () { state.sort = sortS.value; apply(); });
     byId("cat-reset").addEventListener("click", function () { state = { rooms: [], zk: "", pmax: PMAX, deal: "", srok: "", sort: "price-asc", fav: false }; syncControls(); apply(); });
-    byId("cat-empty-reset").addEventListener("click", function () { byId("cat-reset").click(); });
+    var catEmptyReset = byId("cat-empty-reset"); if (catEmptyReset) catEmptyReset.addEventListener("click", function () { byId("cat-reset").click(); });
     grid.addEventListener("click", function (e) {
       var favBtn = e.target.closest(".flat-fav");
       if (favBtn) {
@@ -714,18 +714,122 @@
   }
 
   /* ---------- Переключатель языка Рус / Qaz ----------
-     Казахской версии пока нет — честно сообщаем «скоро», не подменяя контент. */
+     Перевод выполняется в рантайме по СОДЕРЖИМОМУ текстовых узлов и ряда атрибутов:
+     словарь window.__I18N_KK__ = { ru_текст: kk_текст } (assets/js/i18n_kk.js, генерится gen_i18n.mjs).
+     Подход покрывает статику, SSR и JS-рендер (renderZhkDetail/renderCatalog/flatCard) единым механизмом —
+     без data-i18n в разметке. Динамический контент ловит MutationObserver. Выбор хранится в localStorage. */
+  var LANG_KEY = "atamura_lang";
   function bindLang() {
     var sw = document.querySelector(".lang-switch");
-    if (!sw) return;
-    sw.addEventListener("click", function (e) {
-      var b = e.target.closest(".lang-opt");
-      if (!b) return;
-      if (b.getAttribute("data-lang") === "kk") {
-        toast("Қазақ нұсқасы — жақында. Версия на казахском скоро.");
-        track("lang_kk_click", {});
+    var DICT = window.__I18N_KK__ || {};
+    var HAS_DICT = false; for (var _k in DICT) { if (DICT.hasOwnProperty(_k)) { HAS_DICT = true; break; } }
+    var ATTRS = ["aria-label", "placeholder", "title", "alt"];
+    var origText = new WeakMap();   // textNode -> исходный ru (с пробелами)
+    var origAttr = new WeakMap();   // element  -> { attr: исходный ru }
+    var lang = "ru";
+    var NBSP = new RegExp(String.fromCharCode(160), "g");
+    function norm(s) { return s.replace(NBSP, " "); }   // &nbsp; → обычный пробел для поиска по словарю
+    // Шаблонные строки с интерполяцией (число/бренд внутри) — словарём не ловятся, переводим по паттерну.
+    var PAT = [
+      { re: /^([0-9 ]+)\s*вариант(?:а|ов)?$/, kk: function (m) { return m[1].replace(/\s+$/, "") + " нұсқа"; } },
+      { re: /^взнос 20% → от (.+) ₸\/мес$/, kk: function (m) { return "20% жарна → " + m[1] + " ₸/айдан"; } },
+      { re: /^от (.+) млн ₸$/, kk: function (m) { return m[1] + " млн ₸-ден"; } },
+      { re: /^от (.+) ₸$/, kk: function (m) { return m[1] + " ₸-ден"; } },
+      { re: /^(\d+)-комнатные в ЖК (.+)$/, kk: function (m) { return m[2] + " ТҮК-тегі " + m[1] + " бөлмелі"; } },
+      { re: /^Студии в ЖК (.+)$/, kk: function (m) { return m[1] + " ТҮК-тегі студиялар"; } },
+      { re: /^Таунхаусы в ЖК (.+)$/, kk: function (m) { return m[1] + " ТҮК-тегі таунхаустар"; } },
+      { re: /^Дуплексы в ЖК (.+)$/, kk: function (m) { return m[1] + " ТҮК-тегі дуплекстер"; } },
+      { re: /^Коттеджи в ЖК (.+)$/, kk: function (m) { return m[1] + " ТҮК-тегі коттедждер"; } },
+      { re: /^Смотреть ЖК (.+)$/, kk: function (m) { return m[1] + " ТҮК-ті қарау"; } },
+      { re: /^Заём (.+) ₸ выше лимита «Наурыз» для Алматы \(36 млн ₸\)\. Увеличьте первый взнос\.$/, kk: function (m) { return m[1] + " ₸ қарыз Алматы үшін «Наурыз» лимитінен (36 млн ₸) асады. Бастапқы жарнаны арттырыңыз."; } },
+      { re: /^(.+) — в новых ЖК (.+)\. Старт продаж скоро — оставьте заявку, сообщим первыми\.$/, kk: function (m) { return (lookupKK(m[1]) || m[1]) + " — жаңа " + m[2].replace(/ и /g, " және ") + " ТҮК-терінде. Сатылым жақында басталады — өтінім қалдырыңыз, бірінші хабарлаймыз."; } }
+    ];
+    // Поиск перевода: словарь → паттерн → составная строка через « · » (переводим части).
+    function lookupKK(t) {
+      var d = DICT[t]; if (d != null) return d;
+      for (var i = 0; i < PAT.length; i++) { var m = t.match(PAT[i].re); if (m) return PAT[i].kk(m); }
+      if (t.indexOf(" · ") >= 0) {
+        var changed = false;
+        var tr = t.split(" · ").map(function (p) { var r = lookupKK(p); if (r != null && r !== p) { changed = true; return r; } return p; });
+        if (changed) return tr.join(" · ");
       }
+      return null;
+    }
+
+    function tnTranslate(node, toKK) {
+      var raw = node.nodeValue; if (!raw) return;
+      var t = raw.trim(); if (!t) return;
+      if (toKK) {
+        var look = norm(t);
+        var kk = lookupKK(look);
+        if (kk && kk !== look && !origText.has(node)) { origText.set(node, raw); node.nodeValue = raw.replace(t, kk); }
+      } else if (origText.has(node)) {
+        node.nodeValue = origText.get(node); origText["delete"](node);
+      }
+    }
+    function elTranslate(el, toKK) {
+      if (!el || el.nodeType !== 1 || !el.getAttribute) return;
+      for (var i = 0; i < ATTRS.length; i++) {
+        var a = ATTRS[i]; if (!el.hasAttribute(a)) continue;
+        if (toKK) {
+          var raw = el.getAttribute(a), t = (raw || "").trim(); if (!t) continue;
+          var look = norm(t), kk = lookupKK(look);
+          if (kk && kk !== look) { var s = origAttr.get(el) || {}; if (!(a in s)) { s[a] = raw; origAttr.set(el, s); el.setAttribute(a, raw.replace(t, kk)); } }
+        } else { var st = origAttr.get(el); if (st && a in st) { el.setAttribute(a, st[a]); delete st[a]; } }
+      }
+    }
+    function walk(root, toKK) {
+      if (root.nodeType === 3) { tnTranslate(root, toKK); return; }
+      if (root.nodeType !== 1) return;
+      var tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode: function (n) {
+          var p = n.parentNode; if (!p) return NodeFilter.FILTER_REJECT;
+          var tag = p.nodeName; if (tag === "SCRIPT" || tag === "STYLE" || tag === "NOSCRIPT") return NodeFilter.FILTER_REJECT;
+          return (n.nodeValue && n.nodeValue.trim()) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        }
+      });
+      var n; while ((n = tw.nextNode())) tnTranslate(n, toKK);
+      elTranslate(root, toKK);
+      var els = root.querySelectorAll("*");
+      for (var i = 0; i < els.length; i++) elTranslate(els[i], toKK);
+    }
+    function setLang(next) {
+      lang = next;
+      document.documentElement.lang = next;
+      if (document.body) walk(document.body, next === "kk");
+      if (sw) [].forEach.call(sw.querySelectorAll(".lang-opt"), function (b) {
+        b.setAttribute("aria-pressed", b.getAttribute("data-lang") === next ? "true" : "false");
+      });
+      try { localStorage.setItem(LANG_KEY, next); } catch (e) {}
+    }
+
+    if (sw) sw.addEventListener("click", function (e) {
+      var b = e.target.closest(".lang-opt"); if (!b) return;
+      var L = b.getAttribute("data-lang");
+      if (L === "kk" && !HAS_DICT) { toast("Қазақ нұсқасы — жақында. Словарь не загрузился."); return; }
+      setLang(L);
+      if (L === "kk") track("lang_kk_click", {});
     });
+
+    // Восстанавливаем выбор пользователя
+    var saved = null; try { saved = localStorage.getItem(LANG_KEY); } catch (e) {}
+    if (saved === "kk" && HAS_DICT) setLang("kk");
+    else { document.documentElement.lang = "ru"; if (sw) [].forEach.call(sw.querySelectorAll(".lang-opt"), function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === "ru" ? "true" : "false"); }); }
+
+    // Перевод динамически добавленного контента (каталог, карточки ЖК) — только когда активен kk
+    if (window.MutationObserver && document.body) {
+      new MutationObserver(function (muts) {
+        if (lang !== "kk") return;
+        for (var i = 0; i < muts.length; i++) {
+          var add = muts[i].addedNodes;
+          for (var j = 0; j < add.length; j++) {
+            var nd = add[j];
+            if (nd.nodeType === 1) walk(nd, true);
+            else if (nd.nodeType === 3) tnTranslate(nd, true);
+          }
+        }
+      }).observe(document.body, { childList: true, subtree: true });
+    }
   }
 
   /* ---------- Калькулятор господдержки «Наурыз» (Отбасы): двухэтапная модель ЖСС ----------
