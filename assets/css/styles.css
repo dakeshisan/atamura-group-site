@@ -86,6 +86,15 @@
     font-feature-settings: "ss03", "cv11";
     transition: background 200ms;
   }
+  /* Казахский режим: единый шрифт Montserrat. Jost НЕ содержит ә ғ қ ң ө ұ ү һ і —
+     эти буквы подменялись на fallback и «плясали» внутри слов. Montserrat покрывает казахский
+     полностью и единообразно. Русский (Jost) и заголовки (Cormorant) не затрагиваются. */
+  html[lang="kk"] body {
+    font-family: 'Montserrat', 'Futura PT', 'Futura', -apple-system, system-ui, sans-serif;
+    font-feature-settings: normal;
+  }
+  /* Montserrat заметно шире Jost — верхнее меню из 8 пунктов слегка ужимаем, чтобы оно помещалось в строку. */
+  html[lang="kk"] .nav-main { gap: 8px; font-size: 12px; letter-spacing: -0.005em; }
   img { display: block; max-width: 100%; height: auto; }
   a { color: inherit; text-decoration: none; }
   button { font: inherit; cursor: pointer; }
@@ -888,6 +897,12 @@
   @media (max-width: 1360px) {
     .nav-main { display: none; }
     .burger { display: inline-flex; }
+  }
+  /* Казахская версия: Montserrat шире Jost, меню из 8 пунктов длиннее → шапка переполнялась бы.
+     Для kk прячем верхнее меню в бургер раньше (бургер содержит все пункты + переключатель языка). */
+  @media (max-width: 1400px) {
+    html[lang="kk"] .nav-main { display: none; }
+    html[lang="kk"] .burger { display: inline-flex; }
   }
   @media (max-width: 980px) {
     .head-cta { display: none; }
