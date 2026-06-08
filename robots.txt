@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-# Soft-launch: meta robots = noindex,nofollow на всех страницах. Sitemap не публикуется до публичного открытия.
+Sitemap: https://atamura.group/sitemap.xml
