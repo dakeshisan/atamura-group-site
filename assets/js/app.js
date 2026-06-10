@@ -969,4 +969,18 @@
       (function (h) { h.addEventListener("click", function () { h.parentNode.classList.toggle("is-open"); }); })(hs[i]);
     }
   });
+
+  /* #39 markup-review: floating «Избранное» badge (bottom-left) when favorites exist */
+  function favFloat(){
+    var n=getFav().length, el=byId("favFloat");
+    if(n>0 && !el){
+      el=document.createElement("a"); el.id="favFloat"; el.href=rel("flats.html")+"?fav=1";
+      el.setAttribute("aria-label","Избранные квартиры");
+      el.innerHTML='<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="fav-float-n"></span>';
+      document.body.appendChild(el);
+    }
+    if(el){ el.style.display=n>0?"flex":"none"; var cc=el.querySelector(".fav-float-n"); if(cc) cc.textContent=n; }
+  }
+  try{ favFloat(); }catch(e){}
+  document.addEventListener("click", function(e){ if(e.target.closest && e.target.closest(".flat-fav, .cat-fav-toggle")) setTimeout(favFloat,0); }, true);
 })();

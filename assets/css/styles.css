@@ -1420,3 +1420,10 @@
 .foot-cta-form input { flex: 1 1 180px; min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 8px; font: inherit; background: #fff; color: var(--ink); }
 .foot-cta-form .btn { min-height: 48px; flex: 0 0 auto; }
 .foot-cta-consent { flex: 1 1 100%; font-size: 11px; color: var(--ink-mute); margin: 0; }
+
+/* #39 markup-review: плавающая иконка «Избранное» снизу слева */
+#favFloat { position: fixed; left: 16px; bottom: 16px; z-index: 60; display: none; align-items: center; gap: 6px; height: 48px; padding: 0 16px; border-radius: 999px; background: var(--brand); color: #fff; box-shadow: 0 8px 22px oklch(0% 0 0 / .25); text-decoration: none; font-weight: 700; }
+#favFloat svg { flex: 0 0 auto; }
+@media (max-width: 760px){ #favFloat { bottom: 76px; } }
+/* #48 markup-review: сравнение — метки строк по левому краю */
+.cmp-row-label { text-align: left !important; }
