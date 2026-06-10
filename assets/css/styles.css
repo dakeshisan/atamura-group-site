@@ -1400,3 +1400,7 @@
 .foot-col ul li:last-child { border-bottom: 0; }
 .foot-col ul li a { display: block; padding: 7px 0; }
 .foot-col-projects li a { display: flex; align-items: center; gap: 6px; }
+
+/* #62 markup-review: каталог-карточка ЖК — минималистичная (только аккуратная кнопка) */
+.zk-main .catalog-card { background: none; border: 0; box-shadow: none; padding: 0; margin: var(--s-4) 0 0; }
+.zk-main .catalog-card .btn { width: auto; }
