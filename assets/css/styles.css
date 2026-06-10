@@ -1404,3 +1404,13 @@
 /* #62 markup-review: каталог-карточка ЖК — минималистичная (только аккуратная кнопка) */
 .zk-main .catalog-card { background: none; border: 0; box-shadow: none; padding: 0; margin: var(--s-4) 0 0; }
 .zk-main .catalog-card .btn { width: auto; }
+
+/* ===== markup r4: компактные hero внутренних страниц ===== */
+/* #40 (карта), #46 (сравнение), #50 (квартиры): hero не «огромный» */
+.pagehero { padding: clamp(28px,4vw,52px) 0 clamp(22px,3vw,34px) !important; }
+.pagehero .crumbs { margin-bottom: var(--s-3); }
+/* #41: крошки слева в верхнем углу (в т.ч. на мобиле) */
+.pagehero .crumbs { justify-content: flex-start; }
+@media (max-width: 760px){ .pagehero .crumbs { justify-content: flex-start; text-align: left; } .pagehero-title, .pagehero-lead { text-align: left; margin-left: 0; } }
+/* #42: заголовок заметно крупнее крошек/адреса */
+.pagehero-title { font-size: clamp(26px, 5vw, 40px); line-height: 1.1; }
