@@ -671,6 +671,11 @@
   .foot-col a { font-size: 13px; color: var(--ink-soft); transition: color 120ms; }
   .foot-col a:hover { color: var(--ink); }
   .foot-col .new { display: inline-block; padding: 2px 6px; margin-left: 6px; background: var(--accent); color: var(--accent-on); font-size: 9px; font-weight: 700; letter-spacing: 0.04em; border-radius: 4px; vertical-align: middle; }
+  /* #34 markup-review: бейдж «скоро» выровнен по центру с названием ЖК */
+  .foot-col-projects li a { display: inline-flex; align-items: center; gap: 6px; }
+  .foot-col-projects li .new { margin-left: 0; }
+  /* #18 markup-review: подзаголовок ЖК вынесен под hero (как карточки BI.group) */
+  .zk-intro { font-size: 16px; line-height: 1.5; color: var(--ink-soft); max-width: 70ch; margin: 2px 0 var(--s-6); text-align: left; }
 
   .foot-bottom { display: grid; grid-template-columns: auto 1fr auto; gap: var(--s-5); align-items: center; padding-top: var(--s-5); border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-mute); }
   .foot-bottom-disclaimer { max-width: 60ch; line-height: 1.5; }
@@ -709,7 +714,8 @@
     .botnav-fab .botnav-fab-circle svg { width: 26px; height: 26px; }
     .floater, .sticky-bar { display: none !important; }
     .burger { display: none !important; }
-    .head:not(.over) { position: static !important; box-shadow: none !important; backdrop-filter: none !important; }
+    /* #38 markup-review: зафиксировать хэдэр на мобиле (был static — уезжал при скролле) */
+    .head:not(.over) { position: sticky !important; top: 0 !important; z-index: 50 !important; }
     .head.over.is-stuck { position: absolute !important; top: 48px !important; background: transparent !important; border-bottom: 0 !important; box-shadow: none !important; backdrop-filter: none !important; }
     /* На мобайле бургера нет (внизу botnav) — но переключатель языка должен оставаться ВИДИМЫМ в шапке,
        иначе казахскую версию не найти (была жалоба). Лого слева, компактный Рус/Qaz справа; прочее из head-utils скрыто. */
