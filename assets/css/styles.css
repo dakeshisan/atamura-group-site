@@ -1414,3 +1414,9 @@
 @media (max-width: 760px){ .pagehero .crumbs { justify-content: flex-start; text-align: left; } .pagehero-title, .pagehero-lead { text-align: left; margin-left: 0; } }
 /* #42: заголовок заметно крупнее крошек/адреса */
 .pagehero-title { font-size: clamp(26px, 5vw, 40px); line-height: 1.1; }
+
+/* #45/#49/#55 markup-review: лид-форма (имя+телефон) в footer-CTA */
+.foot-cta-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; max-width: 560px; }
+.foot-cta-form input { flex: 1 1 180px; min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 8px; font: inherit; background: #fff; color: var(--ink); }
+.foot-cta-form .btn { min-height: 48px; flex: 0 0 auto; }
+.foot-cta-consent { flex: 1 1 100%; font-size: 11px; color: var(--ink-mute); margin: 0; }
