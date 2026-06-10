@@ -1427,3 +1427,8 @@
 @media (max-width: 760px){ #favFloat { bottom: 76px; } }
 /* #48 markup-review: сравнение — метки строк по левому краю */
 .cmp-row-label { text-align: left !important; }
+
+/* #53 markup-review: список проектов вертикальным на мобиле */
+@media (max-width: 760px){ #projects .grid-3 { grid-template-columns: 1fr; } }
+/* #56 markup-review: заголовок ЖК — под баннером (как BI) */
+.zk-pagetitle { font-size: clamp(26px, 5vw, 38px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 var(--s-3); color: var(--ink); }

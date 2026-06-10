@@ -152,7 +152,7 @@
     var res=byId('cmpResult');
     if(sel.length<2){res.hidden=true;res.innerHTML='';return;}
     var picks=sel.map(function(s){return rows.filter(function(r){return r.slug===s;})[0];}).filter(Boolean);
-    var fields=[['Район','district'],['Статус','status'],['Класс','segment'],['Цена от','price'],['Планировки','rooms'],['Сейсмостойкость','seismic']];
+    var fields=[['Район','district'],['Статус','status'],['Класс','segment'],['Цена от','price'],['Комнатность','rooms'],['Сейсмостойкость','seismic']];
     var html='<div class="cmp-table-wrap"><table class="cmp-table"><thead><tr><th></th>'+picks.map(function(p){return '<th><strong>'+p.name+'</strong><div class="cmp-th-link"><a href="zk/'+p.slug+'.html">Открыть страницу →</a></div></th>';}).join('')+'</tr></thead><tbody>'+fields.map(function(f){return '<tr><td class="cmp-row-label">'+f[0]+'</td>'+picks.map(function(p){return '<td>'+p[f[1]]+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div>';
     res.innerHTML=html; res.hidden=false; res.scrollIntoView({behavior:'smooth',block:'start'});
   }
