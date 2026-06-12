@@ -223,10 +223,10 @@
     input.addEventListener("input", clr);
   }
 
-  /* ---------- Лид-формы (валидация → заглушка → localStorage → /спасибо) ---------- */
-  /* URL Cloudflare Worker для отправки заявок в Telegram. Пусто → fallback в localStorage.
-     Установка: см. docs/SETUP_TELEGRAM_LEADS.md (создать бот → chat_id → задеплоить воркер → вставить URL ниже). */
-  var LEAD_WEBHOOK = "";
+  /* ---------- Лид-формы (валидация → доставка → localStorage → /спасибо) ---------- */
+  /* Endpoint доставки заявок: TM_Calculator Hono-сервер (VDS) → файл + Bitrix24 crm.lead.add.
+     Пусто → fallback только в localStorage. */
+  var LEAD_WEBHOOK = "https://calculator.atamuragroup.kz/api/site-lead";
   function bindForms(scope) {
     bindPhones(scope);
     (scope || document).querySelectorAll("form.lead-form").forEach(function (f) {
