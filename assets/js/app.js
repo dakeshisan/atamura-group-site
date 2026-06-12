@@ -21,7 +21,7 @@
     if (n10 >= 2 && n10 <= 4 && (n100 < 10 || n100 >= 20)) return few;
     return many;
   }
-  var WA_PHONE = "77007001111";
+  var WA_PHONE = "77006410499";
   /* Аналитика: пушим в dataLayer (GTM-совместимо) и в gtag, если GA4 загружен. Без PII (номер не пишем). */
   function track(name, params) {
     try {
@@ -912,7 +912,7 @@
       if (s2) s2.innerHTML = money(pay2) + "<sub>₸/мес</sub>";
       if (ov) ov.innerHTML = money(overpay) + "<sub>₸</sub>";
       if (warn) { warn.hidden = !over; if (over) warn.textContent = "Заём " + money(loan) + " ₸ выше лимита «Наурыз» для Алматы (36 млн ₸). Увеличьте первый взнос."; }
-      if (wa) wa.setAttribute("href", "https://wa.me/77007001111?text=" + encodeURIComponent("Здравствуйте! Интересует господдержка «Наурыз». Квартира " + money(P) + " ₸, первый взнос " + dpPct + "% (" + money(down) + " ₸). Подскажите по программе и точному расчёту."));
+      if (wa) wa.setAttribute("href", "https://wa.me/77006410499?text=" + encodeURIComponent("Здравствуйте! Интересует господдержка «Наурыз». Квартира " + money(P) + " ₸, первый взнос " + dpPct + "% (" + money(down) + " ₸). Подскажите по программе и точному расчёту."));
     }
     var nzTracked = false;
     function nzTrack() { if (!nzTracked) { nzTracked = true; track("mortgage_calc_used", { calc: "nauryz", page: location.pathname }); } }
